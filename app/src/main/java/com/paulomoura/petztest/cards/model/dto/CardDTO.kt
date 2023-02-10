@@ -2,7 +2,7 @@ package com.paulomoura.petztest.cards.model.dto
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 data class CardDTO (
     @SerializedName("cardId") val cardId: String?,

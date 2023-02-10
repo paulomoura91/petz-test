@@ -13,7 +13,4 @@ interface CardsService {
 
     @GET("cards/sets/{set}")
     suspend fun getCardsInASet(@HeaderMap headers: Map<String, String>, @Path("set") set: String): List<CardDTO>
-
-    @GET("cards/{card}")
-    suspend fun getSingleCard(@HeaderMap headers: Map<String, String>, @Path("card") cardId: String): List<CardDTO>
 }
