@@ -10,9 +10,7 @@ import com.paulomoura.petztest.cards.model.dto.Card
 import com.paulomoura.petztest.databinding.ActivityCardDetailBinding
 import com.paulomoura.petztest.extensions.bindings
 import com.paulomoura.petztest.extensions.setupToolbar
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class CardDetailActivity : AppCompatActivity() {
 
     private val binding by bindings(ActivityCardDetailBinding::inflate)
@@ -37,7 +35,7 @@ class CardDetailActivity : AppCompatActivity() {
                 textFlavor.text = it.flavor
                 textShortText.text = it.text
                 textSet.text = "Set: ${it.cardSet}"
-                textType.text = "Text: ${it.type}"
+                textType.text = "Type: ${it.type}"
                 textFaction.text = "Faction: ${it.faction}"
                 textRarity.text = "Rarity: ${it.rarity}"
                 textAttack.text = "Attack: ${it.attack}"
