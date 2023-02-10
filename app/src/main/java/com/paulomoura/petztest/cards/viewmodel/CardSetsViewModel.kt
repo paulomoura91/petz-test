@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.paulomoura.petztest.cards.model.dto.Card
+import com.paulomoura.petztest.cards.model.dto.toCard
 import com.paulomoura.petztest.cards.model.repository.CardsRepository
 import com.paulomoura.petztest.commons.Response
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,6 +17,8 @@ class CardSetsViewModel @Inject constructor(private val repository: CardsReposit
 
     private val cardSetsMutableLivedata = MutableLiveData<Response<List<String>>>()
     val cardSetsLiveData: LiveData<Response<List<String>>> get() = cardSetsMutableLivedata
+    private var cardsMutableLiveData = MutableLiveData<Response<List<Card>>>()
+    val cardsLiveData: LiveData<Response<List<Card>>> get() = cardsMutableLiveData
 
     fun getSets() {
         viewModelScope.launch {
@@ -28,4 +32,19 @@ class CardSetsViewModel @Inject constructor(private val repository: CardsReposit
             }
         }
     }
+
+    fun getCardsInASet(set: String) {
+        viewModelScope.launch {
+            cardsMutableLiveData.value = Response.Loading()
+            try {
+                val cardDTOs = repository.getCardsInASet(set)
+                val cards = cardDTOs.map { it.toCard() }
+                cardsMutableLiveData.value = Response.Success(data = cards)
+            } catch (exception: Exception) {
+                cardsMutableLiveData.value = Response.Error(error = exception)
+            }
+        }
+    }
+
+    fun clearCards() { cardsMutableLiveData = MutableLiveData<Response<List<Card>>>() }
 }

@@ -13,7 +13,8 @@ class CardsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cards)
         setupToolbar(R.string.cards_toolbar_title)
-        showCardSetsList()
+        if (savedInstanceState == null)
+            showCardSetsList()
     }
 
     private fun showCardSetsList() {

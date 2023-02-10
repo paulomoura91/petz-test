@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".cards.view.CardSetsFragment">
+    tools:context=".cards.view.CardsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
@@ -15,7 +15,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/itemlist_card_sets" />
+        tools:listitem="@layout/itemlist_cards" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/loading_view"

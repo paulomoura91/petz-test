@@ -57,9 +57,18 @@ class CardSetsFragment : Fragment() {
 
     private fun loadCardSets(cardSets: List<String>?) {
         binding.loadingView.isVisible = false
-        cardSets?.let {
-            binding.list.adapter = CardSetsRecyclerViewAdapter(it)
+        cardSets?.let { sets ->
+            binding.list.adapter = CardSetsRecyclerViewAdapter(sets) { selectedSet ->
+                showCardsList(selectedSet)
+            }
         }
+    }
+
+    private fun showCardsList(set: String) {
+        val transaction = parentFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, CardsFragment.newInstance(set))
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     private fun showError(throwable: Throwable?) {
