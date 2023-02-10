@@ -1,8 +1,8 @@
 package com.paulomoura.petztest.cards.view
 
+import android.annotation.SuppressLint
 import android.os.Build.VERSION
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.paulomoura.petztest.R
 import com.paulomoura.petztest.cards.model.dto.Card
@@ -18,11 +18,12 @@ class CardDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_card_detail)
+        setContentView(binding.root)
         setupToolbar(R.string.card_details_toolbar_title)
         loadCardDetails()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun loadCardDetails() {
         val card = if (VERSION.SDK_INT >= 33) {
             intent.getParcelableExtra(CARD_EXTRA, Card::class.java)
@@ -30,7 +31,18 @@ class CardDetailActivity : AppCompatActivity() {
             @Suppress("DEPRECATION") intent.getParcelableExtra(CARD_EXTRA)
         }
         card?.let {
-            Toast.makeText(this, card.name, Toast.LENGTH_LONG).show()
+            with(binding) {
+                textName.text = it.name
+                textFlavor.text = it.flavor
+                textShortText.text = it.text
+                textSet.text = "Set: ${it.cardSet}"
+                textType.text = "Text: ${it.type}"
+                textFaction.text = "Faction: ${it.faction}"
+                textRarity.text = "Rarity: ${it.rarity}"
+                textAttack.text = "Attack: ${it.attack}"
+                textCost.text = "Cost: ${it.cost}"
+                textHealth.text = "Health: ${it.health}"
+            }
         }
     }
 

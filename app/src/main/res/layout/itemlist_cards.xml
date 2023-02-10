@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:minHeight="96dp"
     android:elevation="8dp"
     android:layout_margin="8dp">
 
@@ -19,20 +20,13 @@
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
-            android:id="@+id/flavor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"
-            android:textAppearance="?attr/textAppearanceListItem" />
-
-        <TextView
             android:id="@+id/type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="8dp"
-            android:textAppearance="?attr/textAppearanceListItem" />
+            android:alpha="0.7"
+            android:textAppearance="?attr/textAppearanceListItemSecondary" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -2,9 +2,6 @@ package com.paulomoura.petztest.cards.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
@@ -20,7 +17,7 @@ import com.paulomoura.petztest.databinding.FragmentCardsBinding
 import com.paulomoura.petztest.extensions.bindings
 
 @Suppress("NAME_SHADOWING")
-class CardsFragment : Fragment() {
+class CardsFragment : Fragment(R.layout.fragment_cards) {
 
     private val viewModel: CardSetsViewModel by activityViewModels()
     private val binding by bindings(FragmentCardsBinding::bind)
@@ -32,13 +29,6 @@ class CardsFragment : Fragment() {
         arguments?.let {
             set = it.getString(ARG_SET)
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_cards, container, false)
     }
 
     override fun onStart() {

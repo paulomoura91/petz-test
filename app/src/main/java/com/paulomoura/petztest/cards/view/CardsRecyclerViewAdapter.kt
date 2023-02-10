@@ -24,7 +24,6 @@ class CardsRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val card = cards[position]
         holder.nameView.text = card.name
-        holder.flavorView.text = card.flavor
         holder.typeView.text = card.type
         holder.root.setOnClickListener {
             clickListener.invoke(card)
@@ -36,7 +35,6 @@ class CardsRecyclerViewAdapter(
     inner class ViewHolder(binding: ItemlistCardsBinding) : RecyclerView.ViewHolder(binding.root) {
         val root = binding.root
         val nameView = binding.name
-        val flavorView = binding.flavor
         val typeView = binding.type
     }
 

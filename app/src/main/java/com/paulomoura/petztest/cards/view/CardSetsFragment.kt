@@ -1,9 +1,5 @@
 package com.paulomoura.petztest.cards.view
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -17,17 +13,10 @@ import com.paulomoura.petztest.extensions.bindings
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CardSetsFragment : Fragment() {
+class CardSetsFragment : Fragment(R.layout.fragment_card_sets) {
 
     private val viewModel: CardSetsViewModel by activityViewModels()
     private val binding by bindings(FragmentCardSetsBinding::bind)
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_card_sets, container, false)
-    }
 
     override fun onStart() {
         super.onStart()
