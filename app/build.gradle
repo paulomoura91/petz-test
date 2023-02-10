@@ -77,6 +77,8 @@ dependencies {
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
     testImplementation "androidx.arch.core:core-testing:2.1.0"
     testImplementation "io.mockk:mockk:1.12.7"
+    testImplementation "com.google.dagger:hilt-android-testing:2.38.1"
+    kaptTest "com.google.dagger:hilt-android-compiler:2.38.1"
 }
 
 kapt {
