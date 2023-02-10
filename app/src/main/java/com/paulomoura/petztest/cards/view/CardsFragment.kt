@@ -1,5 +1,6 @@
 package com.paulomoura.petztest.cards.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulomoura.petztest.R
 import com.paulomoura.petztest.cards.model.dto.Card
+import com.paulomoura.petztest.cards.view.CardDetailActivity.Companion.CARD_EXTRA
 import com.paulomoura.petztest.cards.viewmodel.CardSetsViewModel
 import com.paulomoura.petztest.commons.Response
 import com.paulomoura.petztest.databinding.FragmentCardsBinding
@@ -90,7 +92,9 @@ class CardsFragment : Fragment() {
     }
 
     private fun showCardDetail(card: Card) {
-
+        startActivity(Intent(requireContext(), CardDetailActivity::class.java).apply {
+            putExtra(CARD_EXTRA, card)
+        })
     }
 
     private fun showError(throwable: Throwable?) {

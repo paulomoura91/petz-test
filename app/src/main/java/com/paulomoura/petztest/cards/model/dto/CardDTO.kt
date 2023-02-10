@@ -1,6 +1,8 @@
 package com.paulomoura.petztest.cards.model.dto
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class CardDTO (
     @SerializedName("cardId") val cardId: String?,
@@ -23,7 +25,9 @@ data class CardDTO (
     @SerializedName("locale") val locale: String?
 )
 
+@Parcelize
 data class Card (
+    val cardId: String?,
     val img: String?,
     val name: String?,
     val flavor: String?,
@@ -35,10 +39,11 @@ data class Card (
     val attack: Int?,
     val cost: Int?,
     val health: Int?
-)
+) : Parcelable
 
 fun CardDTO.toCard() =
     Card(
+        cardId = cardId,
         img = img,
         name = name,
         flavor = flavor,
