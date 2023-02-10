@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Build.VERSION
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.paulomoura.petztest.R
 import com.paulomoura.petztest.cards.model.dto.Card
 import com.paulomoura.petztest.databinding.ActivityCardDetailBinding
@@ -42,6 +43,10 @@ class CardDetailActivity : AppCompatActivity() {
                 textAttack.text = "Attack: ${it.attack}"
                 textCost.text = "Cost: ${it.cost}"
                 textHealth.text = "Health: ${it.health}"
+
+                Glide.with(this@CardDetailActivity)
+                    .load(it.img)
+                    .into(cardImage)
             }
         }
     }
