@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.paulomoura.petztest.R
 import com.paulomoura.petztest.cards.viewmodel.CardSetsViewModel
@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CardSetsFragment : Fragment() {
 
-    private val viewModel: CardSetsViewModel by viewModels()
+    private val viewModel: CardSetsViewModel by activityViewModels()
     private val binding by bindings(FragmentCardSetsBinding::bind)
 
     override fun onCreateView(
@@ -29,17 +29,26 @@ class CardSetsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_card_sets, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
         binding.list.layoutManager = GridLayoutManager(context, COLUMN_COUNT)
-        viewModel.cardSetsLiveData.observe(viewLifecycleOwner) {
-            when (it) {
-                is Response.Loading -> showLoading()
-                is Response.Success -> loadCardSets(it.data)
-                is Response.Error -> showError(it.error)
+
+        viewModel.cardSetsLiveData.value?.let {
+            handleResponse(it)
+        } ?: run {
+            viewModel.cardSetsLiveData.observe(viewLifecycleOwner) {
+                handleResponse(it)
             }
+            viewModel.getSets()
         }
-        viewModel.getSets()
+    }
+
+    private fun handleResponse(response: Response<List<String>>) {
+        when (response) {
+            is Response.Loading -> showLoading()
+            is Response.Success -> loadCardSets(response.data)
+            is Response.Error -> showError(response.error)
+        }
     }
 
     private fun showLoading() {
