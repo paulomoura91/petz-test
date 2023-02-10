@@ -29,8 +29,8 @@ class CardSetsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_card_sets, container, false)
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         binding.list.layoutManager = GridLayoutManager(context, COLUMN_COUNT)
 
         viewModel.cardSetsLiveData.value?.let {
