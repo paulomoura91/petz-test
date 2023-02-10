@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.paulomoura.petztest.R
-import com.paulomoura.petztest.cards.viewmodel.CardSetsViewModel
+import com.paulomoura.petztest.cards.viewmodel.CardsViewModel
 import com.paulomoura.petztest.commons.Response
 import com.paulomoura.petztest.databinding.FragmentCardSetsBinding
 import com.paulomoura.petztest.extensions.bindings
@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CardSetsFragment : Fragment(R.layout.fragment_card_sets) {
 
-    private val viewModel: CardSetsViewModel by activityViewModels()
+    private val viewModel: CardsViewModel by activityViewModels()
     private val binding by bindings(FragmentCardSetsBinding::bind)
 
     override fun onStart() {

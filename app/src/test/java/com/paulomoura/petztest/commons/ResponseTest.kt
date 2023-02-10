@@ -1,6 +1,5 @@
-package com.paulomoura.petztest.cards.commons
+package com.paulomoura.petztest.commons
 
-import com.paulomoura.petztest.commons.Response
 import org.junit.Test
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull

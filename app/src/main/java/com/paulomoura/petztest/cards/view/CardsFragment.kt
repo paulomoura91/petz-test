@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulomoura.petztest.R
 import com.paulomoura.petztest.cards.model.dto.Card
 import com.paulomoura.petztest.cards.view.CardDetailActivity.Companion.CARD_EXTRA
-import com.paulomoura.petztest.cards.viewmodel.CardSetsViewModel
+import com.paulomoura.petztest.cards.viewmodel.CardsViewModel
 import com.paulomoura.petztest.commons.Response
 import com.paulomoura.petztest.databinding.FragmentCardsBinding
 import com.paulomoura.petztest.extensions.bindings
@@ -19,7 +19,7 @@ import com.paulomoura.petztest.extensions.bindings
 @Suppress("NAME_SHADOWING")
 class CardsFragment : Fragment(R.layout.fragment_cards) {
 
-    private val viewModel: CardSetsViewModel by activityViewModels()
+    private val viewModel: CardsViewModel by activityViewModels()
     private val binding by bindings(FragmentCardsBinding::bind)
 
     private var set: String? = null

@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CardSetsViewModel @Inject constructor(private val repository: CardsRepository) : ViewModel() {
+class CardsViewModel @Inject constructor(private val repository: CardsRepository) : ViewModel() {
 
     private val cardSetsMutableLivedata = MutableLiveData<Response<List<String>>>()
     val cardSetsLiveData: LiveData<Response<List<String>>> get() = cardSetsMutableLivedata
@@ -21,8 +21,8 @@ class CardSetsViewModel @Inject constructor(private val repository: CardsReposit
     val cardsLiveData: LiveData<Response<List<Card>>> get() = cardsMutableLiveData
 
     fun getSets() {
+        cardSetsMutableLivedata.value = Response.Loading()
         viewModelScope.launch {
-            cardSetsMutableLivedata.value = Response.Loading()
             try {
                 val setDTO = repository.getSets()
                 if (setDTO.sets == null) throw Exception("Error at getting Card Sets from the server")
@@ -34,8 +34,8 @@ class CardSetsViewModel @Inject constructor(private val repository: CardsReposit
     }
 
     fun getCardsInASet(set: String) {
+        cardsMutableLiveData.value = Response.Loading()
         viewModelScope.launch {
-            cardsMutableLiveData.value = Response.Loading()
             try {
                 val cardDTOs = repository.getCardsInASet(set)
                 val cards = cardDTOs.map { it.toCard() }
