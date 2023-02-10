@@ -1,4 +1,4 @@
-package com.paulomoura.petztest.cards.di
+package com.paulomoura.petztest.di
 
 import com.paulomoura.petztest.cards.model.network.CardsService
 import dagger.Module
