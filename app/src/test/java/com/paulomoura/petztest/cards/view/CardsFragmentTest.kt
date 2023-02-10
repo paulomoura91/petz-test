@@ -1,8 +1,11 @@
 package com.paulomoura.petztest.cards.view
 
 import androidx.core.os.bundleOf
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -27,6 +30,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowToast
 
@@ -82,6 +86,23 @@ class CardsFragmentTest {
 
                 onView(withId(R.id.loading_view)).check(matches(not(isDisplayed())))
                 assert("Error: network error" == ShadowToast.getTextOfLatestToast())
+            }
+        }
+    }
+
+    @Test
+    fun `Select a card and check whether Card Details screen has been initialized`() {
+        coEvery { cardsRepository.getCardsInASet(any()) } returns getFakeCardDTOs()
+        launchFragmentInHiltContainer<CardsFragment>(
+            fragmentArgs = bundleOf("ARG_SET" to "set")
+        ) {
+            runTest {
+                advanceUntilIdle()
+
+                onView(withId(R.id.list)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+
+                val activityIntent = shadowOf(activity).peekNextStartedActivity()
+                assert(CardDetailActivity::class.java.canonicalName == activityIntent.component?.className)
             }
         }
     }
